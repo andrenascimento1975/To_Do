@@ -35,10 +35,10 @@
         <div class="task-title">
             {% if tarefa.complete %}
             <div class="task-complete-icon"></div>
-            <a href="{% url 'grupos' tarefa.id %}">{{tarefa}}</a>
+            <a href="{% url 'mostra_tarefa_grupo' tarefa.id %}">{{tarefa}}</a>
             {% else %}
             <div class="task-incomplete-icon"></div>
-            <a href="{% url 'grupos' tarefa.id %}">{{tarefa}}</a>
+            <a href="{% url 'mostra_tarefa_grupo' tarefa.id %}">{{tarefa}}</a>
             {% endif %}
         </div>
         <div class="task-controls">

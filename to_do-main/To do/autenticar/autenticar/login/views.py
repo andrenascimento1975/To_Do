@@ -16,7 +16,7 @@ class Logar(LoginView):
     redirect_authenticated_user = True
 
     def get_success_url(self):
-        return reverse_lazy('mostra_tarefa_grupo')
+        return reverse_lazy('grupos')
 
 class Registrar(FormView):
     template_name = 'login/registrar.html'
