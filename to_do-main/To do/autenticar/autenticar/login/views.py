@@ -16,7 +16,7 @@ class Logar(LoginView):
     redirect_authenticated_user = True
 
     def get_success_url(self):
-        return reverse_lazy('grupos')
+        return reverse_lazy('mostra_tarefa_grupo')
 
 class Registrar(FormView):
     template_name = 'login/registrar.html'
@@ -131,5 +131,15 @@ class VisualizaGrupo(LoginRequiredMixin, ListView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super(VisualizaGrupo, self).form_valid(form)
+        return super(VisualizaGrupo, self)
 
+class Mostra_tarefa_grupo(LoginRequiredMixin, ListView):
+    model = Grupos
+    fields = '__all__'
+    context_object_name = 'criar_grupo'
+    success_url = reverse_lazy('mostra_tarefa_grupo')
+    template_name = 'login/mostra_tarefa_grupo.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(mostra_tarefa_grupo, self)

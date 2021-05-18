@@ -15,8 +15,6 @@
 {% endif %}
 </div>
 
-
-
 <h1>Minhas Tarefas
 {% for author in author_list %}
     <li>{{ mostra_tarefa_grupo }}</li>
@@ -37,10 +35,10 @@
         <div class="task-title">
             {% if tarefa.complete %}
             <div class="task-complete-icon"></div>
-            <a href="{% url 'atualizar' tarefa.id %}">{{tarefa}}</a>
+            <a href="{% url 'grupos' tarefa.id %}">{{tarefa}}</a>
             {% else %}
             <div class="task-incomplete-icon"></div>
-            <a href="{% url 'atualizar' tarefa.id %}">{{tarefa}}</a>
+            <a href="{% url 'grupos' tarefa.id %}">{{tarefa}}</a>
             {% endif %}
         </div>
         <div class="task-controls">
