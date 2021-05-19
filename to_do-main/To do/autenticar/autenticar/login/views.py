@@ -1,4 +1,4 @@
-from .models import Tarefa, Grupos, Tags
+from .models import Tarefa, Grupos, Tags, SubGrupo
 from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -100,17 +100,6 @@ class ApagarGrupo(DeleteView, LoginRequiredMixin):
     success_url = reverse_lazy('grupos')
     template_name = 'login/apagar_grupo.html'
 
-class CriarGrupo(LoginRequiredMixin, CreateView):
-    model = Grupos
-    context_object_name = 'criar_grupo'
-    success_url = reverse_lazy('grupos')
-    fields = '__all__'
-    template_name = 'login/formulario_grupos.html'
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super(CriarGrupo, self).form_valid(form)
-
 class CriarTag(LoginRequiredMixin, CreateView):
     model = Tags
     context_object_name = 'tags'
@@ -133,7 +122,7 @@ class VisualizaGrupo(LoginRequiredMixin, ListView):
         form.instance.user = self.request.user
         return super(VisualizaGrupo, self)
 
-class Mostra_tarefa_grupo(LoginRequiredMixin, ListView):
+class Mostra_tarefa_grupo(LoginRequiredMixin, View):
     model = Grupos
     fields = '__all__'
     context_object_name = 'criar_grupo'
@@ -143,3 +132,36 @@ class Mostra_tarefa_grupo(LoginRequiredMixin, ListView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(mostra_tarefa_grupo, self)
+
+class Mostra_subgrupo(LoginRequiredMixin, View):
+    model = SubGrupo
+    fields = '__all__'
+    context_object_name = 'criar_subgrupo'
+    success_url = reverse_lazy('mostra_subgrupo')
+    template_name = 'login/mostra_subgrupo.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(mostra_subgrupo, self)
+
+class CriarGrupo(LoginRequiredMixin, CreateView):
+    model = Grupos
+    context_object_name = 'criar_grupo'
+    success_url = reverse_lazy('grupos')
+    fields = '__all__'
+    template_name = 'login/formulario_grupos.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(CriarGrupo, self).form_valid(form)
+
+class CriarSubGrupo(LoginRequiredMixin, CreateView):
+    model = SubGrupo
+    context_object_name = 'criar_subgrupo'
+    success_url = reverse_lazy('subgrupos')
+    fields = '__all__'
+    template_name = 'login/formulario_subgrupos.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(CriarSubGrupo, self).form_valid(form)

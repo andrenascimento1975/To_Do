@@ -1,14 +1,16 @@
 from django.urls import path
-from .models import Tarefa, Grupos
-from .views import ListaTarefa, Criar, Atualizar, Apagar, Logar, Registrar, TodasTarefas, VisualizaGrupo, CriarGrupo, ApagarGrupo, AtualizarGrupo, CriarTag, Mostra_tarefa_grupo
+from .models import Tarefa, Grupos, SubGrupo
+from .views import ListaTarefa, Criar, Atualizar, Apagar, Logar, Registrar, TodasTarefas, VisualizaGrupo, CriarGrupo, ApagarGrupo, AtualizarGrupo, CriarTag, Mostra_tarefa_grupo, Mostra_subgrupo, CriarSubGrupo
 from django.contrib.auth.views import LogoutView
 from django.views.generic import TemplateView
 
 urlpatterns = [
+    path('mostra_subgrupo/<int:pk>/', Mostra_subgrupo.as_view(), name='mostra_subgrupo'),
     path('mostra_tarefa_grupo/<int:pk>/', Mostra_tarefa_grupo.as_view(), name='mostra_tarefa_grupo'),
     path('tags/', CriarTag.as_view(), name='tags'),
     path('grupos/', VisualizaGrupo.as_view(), name='grupos'),
     path('criar_grupo/', CriarGrupo.as_view(), name='criar_grupo'),
+    path('criar_subgrupo/', CriarSubGrupo.as_view(), name='criar_subgrupo'),
     path('todas/', TodasTarefas.as_view(), name='completo'),
     path('login/', Logar.as_view(), name='login'),
     path('registrar/', Registrar.as_view(), name='registrar'),
